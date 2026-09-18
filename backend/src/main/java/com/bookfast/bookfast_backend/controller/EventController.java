@@ -1,6 +1,7 @@
 package com.bookfast.bookfast_backend.controller;
 
 import com.bookfast.bookfast_backend.dto.CreateEventRequest;
+import com.bookfast.bookfast_backend.dto.UpdateEventRequest;
 import com.bookfast.bookfast_backend.entity.Event;
 import com.bookfast.bookfast_backend.service.EventService;
 import org.springframework.web.bind.annotation.*;
@@ -31,5 +32,13 @@ public class EventController {
     public Event getEventById(@PathVariable Long id) {
         return eventService.getEventById(id)
                 .orElseThrow();
+    }
+
+    @PutMapping("/{id}")
+    public Event updateEvent(
+            @PathVariable Long id,
+            @RequestBody UpdateEventRequest request
+    ) {
+        return eventService.updateEvent(id, request);
     }
 }

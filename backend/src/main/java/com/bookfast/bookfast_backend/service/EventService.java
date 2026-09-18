@@ -1,6 +1,7 @@
 package com.bookfast.bookfast_backend.service;
 
 import com.bookfast.bookfast_backend.dto.CreateEventRequest;
+import com.bookfast.bookfast_backend.dto.UpdateEventRequest;
 import com.bookfast.bookfast_backend.entity.Event;
 import com.bookfast.bookfast_backend.repository.EventRepository;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,17 @@ public class EventService {
 
     public Optional<Event> getEventById(Long id) {
         return eventRepository.findById(id);
+    }
+
+    public Event updateEvent(Long id, UpdateEventRequest request) {
+
+        Event event = eventRepository.findById(id)
+                .orElseThrow();
+
+        event.setName(request.getName());
+        event.setDescription(request.getDescription());
+        event.setEventDate(request.getEventDate());
+
+        return eventRepository.save(event);
     }
 }
