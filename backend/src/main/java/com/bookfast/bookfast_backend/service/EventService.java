@@ -1,5 +1,6 @@
 package com.bookfast.bookfast_backend.service;
 
+import com.bookfast.bookfast_backend.dto.CreateEventRequest;
 import com.bookfast.bookfast_backend.entity.Event;
 import com.bookfast.bookfast_backend.repository.EventRepository;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,16 @@ public class EventService {
 
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
+    }
+
+    public Event createEvent(CreateEventRequest request) {
+
+        Event event = new Event(
+                request.getName(),
+                request.getDescription(),
+                request.getEventDate()
+        );
+
+        return eventRepository.save(event);
     }
 }
