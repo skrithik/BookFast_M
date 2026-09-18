@@ -3,11 +3,7 @@ package com.bookfast.bookfast_backend.controller;
 import com.bookfast.bookfast_backend.dto.CreateEventRequest;
 import com.bookfast.bookfast_backend.entity.Event;
 import com.bookfast.bookfast_backend.service.EventService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +25,11 @@ public class EventController {
     @PostMapping
     public Event createEvent(@RequestBody CreateEventRequest request) {
         return eventService.createEvent(request);
+    }
+
+    @GetMapping("/{id}")
+    public Event getEventById(@PathVariable Long id) {
+        return eventService.getEventById(id)
+                .orElseThrow();
     }
 }

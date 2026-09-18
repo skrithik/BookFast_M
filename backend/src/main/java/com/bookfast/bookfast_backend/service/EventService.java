@@ -6,6 +6,7 @@ import com.bookfast.bookfast_backend.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventService {
@@ -29,5 +30,9 @@ public class EventService {
         );
 
         return eventRepository.save(event);
+    }
+
+    public Optional<Event> getEventById(Long id) {
+        return eventRepository.findById(id);
     }
 }
