@@ -48,4 +48,12 @@ public class EventService {
 
         return eventRepository.save(event);
     }
+
+    public void deleteEvent(Long id) {
+
+        Event event = eventRepository.findById(id)
+                .orElseThrow();
+
+        eventRepository.delete(event);
+    }
 }
