@@ -9,12 +9,17 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final JwtService jwtService;
 
-    public AuthService(UserRepository userRepository) {
+    public AuthService(
+            UserRepository userRepository,
+            JwtService jwtService
+    ) {
         this.userRepository = userRepository;
+        this.jwtService = jwtService;
     }
 
-    public User login(LoginRequest request) {
+    public String login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
@@ -23,6 +28,6 @@ public class AuthService {
             throw new RuntimeException("Invalid email or password");
         }
 
-        return user;
+        return jwtService.generateToken(user.getEmail());
     }
 }

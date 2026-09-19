@@ -1,7 +1,6 @@
 package com.bookfast.bookfast_backend.controller;
 
 import com.bookfast.bookfast_backend.dto.LoginRequest;
-import com.bookfast.bookfast_backend.entity.User;
 import com.bookfast.bookfast_backend.service.AuthService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public User login(@RequestBody LoginRequest request) {
+    public String login(@RequestBody LoginRequest request) {
         return authService.login(request);
     }
+
+    
 }
