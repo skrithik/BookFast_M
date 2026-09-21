@@ -21,6 +21,17 @@ public class BookingService {
     }
 
     public Booking createBooking(Booking booking) {
+
+        boolean alreadyBooked =
+                bookingRepository.existsByShowIdAndSeatId(
+                        booking.getShow().getId(),
+                        booking.getSeat().getId()
+                );
+
+        if (alreadyBooked) {
+            throw new RuntimeException("Seat is already booked for this show");
+        }
+
         return bookingRepository.save(booking);
     }
 
