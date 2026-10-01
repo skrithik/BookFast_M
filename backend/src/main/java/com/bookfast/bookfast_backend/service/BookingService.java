@@ -3,6 +3,7 @@ package com.bookfast.bookfast_backend.service;
 import com.bookfast.bookfast_backend.entity.Booking;
 import com.bookfast.bookfast_backend.repository.BookingRepository;
 import org.springframework.stereotype.Service;
+import com.bookfast.bookfast_backend.exception.SeatAlreadyBookedException;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +30,9 @@ public class BookingService {
                 );
 
         if (alreadyBooked) {
-            throw new RuntimeException("Seat is already booked for this show");
+            throw new SeatAlreadyBookedException(
+                    "Seat is already booked for this show"
+            );
         }
 
         return bookingRepository.save(booking);

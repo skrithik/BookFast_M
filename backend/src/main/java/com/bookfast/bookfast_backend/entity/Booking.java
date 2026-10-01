@@ -5,6 +5,11 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(
+    uniqueConstraints = @UniqueConstraint(
+        columnNames = {"show_id", "seat_id"}
+    )
+)
 public class Booking {
 
     @Id
