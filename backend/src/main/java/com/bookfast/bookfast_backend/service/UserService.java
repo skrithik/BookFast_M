@@ -1,5 +1,6 @@
 package com.bookfast.bookfast_backend.service;
 
+import com.bookfast.bookfast_backend.entity.Role;
 import com.bookfast.bookfast_backend.entity.User;
 import com.bookfast.bookfast_backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class UserService {
     }
 
     public User createUser(User user) {
+
+        user.setRole(Role.USER);
+        
         return userRepository.save(user);
     }
 

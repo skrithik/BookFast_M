@@ -1,5 +1,6 @@
 package com.bookfast.bookfast_backend.controller;
 
+import com.bookfast.bookfast_backend.dto.CreateUserRequest;
 import com.bookfast.bookfast_backend.entity.User;
 import com.bookfast.bookfast_backend.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,13 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody CreateUserRequest request) {
+        User user = new User(
+                request.getName(),
+                request.getEmail(),
+                request.getPassword()
+        );
+
         return userService.createUser(user);
     }
 
