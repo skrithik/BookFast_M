@@ -2,6 +2,7 @@ package com.bookfast.bookfast_backend.controller;
 
 import com.bookfast.bookfast_backend.entity.Booking;
 import com.bookfast.bookfast_backend.service.BookingService;
+import com.bookfast.bookfast_backend.dto.BookingResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class BookingController {
     }
 
     @PostMapping
-    public Booking createBooking(@RequestBody Booking booking) {
+    public BookingResponse createBooking(@RequestBody Booking booking) {
         return bookingService.createBooking(booking);
     }
 
@@ -31,4 +32,15 @@ public class BookingController {
         return bookingService.getBookingById(id)
                 .orElseThrow();
     }
+
+    @GetMapping("/my")
+    public List<BookingResponse> getMyBookings() {
+        return bookingService.getMyBookings();
+    }
+
+    @DeleteMapping("/{id}")
+    public BookingResponse cancelBooking(@PathVariable Long id) {
+        return bookingService.cancelBooking(id);
+    }
+
 }

@@ -5,11 +5,6 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(
-    uniqueConstraints = @UniqueConstraint(
-        columnNames = {"show_id", "seat_id"}
-    )
-)
 public class Booking {
 
     @Id
@@ -29,6 +24,9 @@ public class Booking {
     private Seat seat;
 
     private LocalDateTime bookedAt;
+
+    @Enumerated(EnumType.STRING)
+    private BookingStatus status;
 
     public Booking() {
     }
@@ -60,6 +58,10 @@ public class Booking {
         return bookedAt;
     }
 
+    public BookingStatus getStatus() {
+        return status;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
@@ -74,5 +76,9 @@ public class Booking {
 
     public void setBookedAt(LocalDateTime bookedAt) {
         this.bookedAt = bookedAt;
+    }
+
+    public void setStatus(BookingStatus status) {
+        this.status = status;
     }
 }
