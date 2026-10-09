@@ -18,7 +18,7 @@ public class BookingController {
     }
 
     @GetMapping
-    public List<Booking> getAllBookings() {
+    public List<BookingResponse> getAllBookings() {
         return bookingService.getAllBookings();
     }
 
@@ -28,9 +28,8 @@ public class BookingController {
     }
 
     @GetMapping("/{id}")
-    public Booking getBookingById(@PathVariable Long id) {
-        return bookingService.getBookingById(id)
-                .orElseThrow();
+    public BookingResponse getBookingById(@PathVariable Long id) {
+        return bookingService.getBookingById(id);
     }
 
     @GetMapping("/my")
@@ -42,5 +41,6 @@ public class BookingController {
     public BookingResponse cancelBooking(@PathVariable Long id) {
         return bookingService.cancelBooking(id);
     }
+
 
 }
